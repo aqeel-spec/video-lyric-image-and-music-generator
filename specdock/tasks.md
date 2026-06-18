@@ -1,110 +1,174 @@
-# Sprint Breakdown - Video-Lyric-Image-and-Music Generator API
+# Sprint 0 - Infrastructure Setup
+**Goal:** Establish core development environment, CI/CD pipeline, and basic project structure
 
-## Sprint 0: Project Scaffold & Infrastructure Setup
-**Goal:** Establish development environment, project structure, and basic CI/CD pipeline
+- [ ] **T-01** Set up GitHub repository with initial project structure and README | **Effort:** S | **FR:** All
+- [ ] **T-02** Configure Docker containers for Node.js backend, PostgreSQL database, and Redis cache | **Effort:** M | **FR:** All
+- [ ] **T-03** Implement basic Kubernetes deployment configurations | **Effort:** M | **FR:** All
+- [ ] [ ] **T-04** Set up GitHub Actions CI/CD pipeline with build and test stages | **Effort:** M | **FR:** All
+- [ ] **T-05** Configure monitoring stack (Prometheus + Grafana) | **Effort:** M | **FR:** All
 
-- [ ] **T-01** Initialize Git repository with README, LICENSE, and project structure | S | FR-01, FR-02, FR-03, FR-04
-- [ ] **T-02** Create docker-compose.yml for local development environment | S | NFR-01, NFR-03
-- [ ] **T-03** Set up FastAPI project skeleton with basic routing | S | FR-01, FR-02, FR-03, FR-04
-- [ ] **T-04** Configure database connection with PostgreSQL and Redis | S | FR-09, FR-06
-- [ ] **T-05** Implement basic pytest framework with sample tests | S | FR-01, FR-02, FR-03, FR-04
-- [ ] **T-06** Set up GitHub Actions CI pipeline for testing | S | NFR-02
-- [ ] **T-07** Configure linters (flake8, black) and pre-commit hooks | S | NFR-02
+---
 
-*Dependencies:* None  
-*Effort:* 7S = 14h  
+# Sprint 1 - Core API Foundation & Authentication
+**Goal:** Build REST API foundation with proper authentication and merchant management
 
-## Sprint 1: Authentication & Rate Limiting
-**Goal:** Implement secure authentication system and rate limiting mechanism
+**Dependencies:** Sprint 0
 
-- [ ] **T-08** Design and implement JWT token generation/validation service | M | FR-07, NFR-03
-- [ ] **T-09** Create API key management endpoints (CRUD operations) | M | FR-07
-- [ ] **T-10** Implement API key database model and migration scripts | S | FR-07
-- [ ] **T-11** Add authentication middleware to validate API keys | M | FR-07
-- [ ] **T-12** Implement rate limiting with Redis-based token buckets | L | FR-06
-- [ ] **T-13** Create rate limit configuration and monitoring dashboard metrics | M | FR-06
-- [ ] **T-14** Write integration tests for authentication flows | M | FR-07
-- [ ] **T-15** Write tests for rate limiting scenarios | M | FR-06
+- [ ] **T-06** Implement merchants table and basic CRUD operations | **Effort:** M | **FR:** FR-05
+- [ ] **T-07** Develop API key generation and validation system | **Effort:** M | **FR:** FR-05
+- [ ] **T-08** Create REST API framework with Express.js and implement basic routing | **Effort:** M | **FR:** FR-05
+- [ ] **T-09** Implement authentication middleware for API requests | **Effort:** M | **FR:** FR-05
+- [ ] **T-10** Add error handling and standardized API responses | **Effort:** S | **FR:** FR-05
+- [ ] **T-11** Set up Swagger/OpenAPI documentation for authentication APIs | **Effort:** S | **FR:** FR-05
 
-*Dependencies:* Sprint 0  
-*Effort:* 2M, 2L, 3S = 22h  
+---
 
-## Sprint 2: Core Generation Framework & Error Handling
-**Goal:** Establish shared components for multimedia generation with proper error handling
+# Sprint 2 - Customer & Subscription Management
+**Goal:** Enable customer and subscription plan management via API
 
-- [ ] **T-16** Design common request/response models and validation schemas | M | FR-01, FR-02, FR-03, FR-04, FR-05
-- [ ] **T-17** Implement global exception handlers for standardized errors | M | FR-05, FR-08
-- [ ] **T-18** Create generation request database model and migrations | M | FR-09
-- [ ] **T-19** Build generation request queue management with Redis | L | FR-09
-- [ ] **T-20** Implement status tracking endpoints (/status/{request_id}) | M | FR-09
-- [ ] **T-21** Develop timeout handling mechanisms | M | FR-08
-- [ ] **T-22** Set up resource monitoring service (memory, disk) | L | FR-10
-- [ ] **T-23** Create health check endpoints for system components | S | NFR-02
+**Dependencies:** Sprint 1
 
-*Dependencies:* Sprint 1  
-*Effort:* 2L, 5M, 2S = 30h  
+- [ ] **T-12** Implement customers table and CRUD operations | **Effort:** M | **FR:** FR-10
+- [ ] **T-13** Design and implement subscription plans table | **Effort:** M | **FR:** FR-02
+- [ ] **T-14** Develop API endpoints for creating subscription plans | **Effort:** M | **FR:** FR-02
+- [ ] **T-15** Build API endpoints for retrieving subscription plans | **Effort:** S | **FR:** FR-02
+- [ ] **T-16** Implement billing cycle validation for subscription plans (daily, weekly, monthly, annual) | **Effort:** M | **FR:** FR-02
+- [ ] **T-17** Create comprehensive test suite for subscription management | **Effort:** M | **FR:** FR-02
 
-## Sprint 3: Image & Lyrics Generation Services
-**Goal:** Implement image and lyrics generation capabilities with streaming support
+---
 
-- [ ] **T-24** Create image generation service with HuggingFace integration | XL | FR-03
-- [ ] **T-25** Implement streaming response mechanism for image outputs | L | FR-03, NFR-01
-- [ ] **T-26** Build image generation API endpoint with parameter validation | M | FR-03
-- [ ] **T-27** Create lyrics generation service using language models | XL | FR-02
-- [ ] **T-28** Implement lyrics formatting and structuring logic | M | FR-02
-- [ ] **T-29** Build lyrics generation API endpoint | M | FR-02
-- [ ] **T-30** Add resolution validation for image requests | S | FR-03
-- [ ] **T-31** Write integration tests for image generation flow | L | FR-03
-- [ ] **T-32** Write integration tests for lyrics generation flow | L | FR-02
+# Sprint 3 - Hosted Checkout Implementation
+**Goal:** Deploy functional hosted checkout page with secure transaction initiation
 
-*Dependencies:* Sprint 2  
-*Effort:* 2XL, 3L, 4M, 1S = 55h  
+**Dependencies:** Sprint 1
 
-## Sprint 4: Music & Video Generation Services
-**Goal:** Implement music and video generation with streaming capabilities
+- [ ] **T-18** Design and implement checkout page template with responsive UI components | **Effort:** M | **FR:** FR-01
+- [ ] **T-19** Implement checkout page endpoint in API | **Effort:** M | **FR:** FR-01
+- [ ] **T-20** Secure checkout page with HTTPS and CSRF protection | **Effort:** M | **FR:** FR-01
+- [ ] **T-21** Pre-fill transaction details on checkout page from API parameters | **Effort:** M | **FR:** FR-01
+- [ ] **T-22** Optimize checkout page load performance to meet 2-second requirement | **Effort:** M | **FR:** FR-01
+- [ ] **T-23** Implement iframe embedding capability for checkout pages | **Effort:** S | **FR:** FR-01
 
-- [ ] **T-33** Create music generation service with audio AI models | XL | FR-04
-- [ ] **T-34** Implement streaming response mechanism for music outputs | L | FR-04, NFR-01
-- [ ] **T-35** Build music generation API endpoint with tempo validation | M | FR-04
-- [ ] **T-36** Create video generation service integrating multiple AI models | XL | FR-01
-- [ ] **T-37** Implement streaming response mechanism for video outputs | L | FR-01, NFR-01
-- [ ] **T-38** Build video generation API endpoint with duration handling | M | FR-01
-- [ ] **T-39** Add parameter validation for music/video requests | M | FR-01, FR-04
-- [ ] **T-40** Write integration tests for music generation flow | L | FR-04
-- [ ] **T-41** Write integration tests for video generation flow | L | FR-01
+---
 
-*Dependencies:* Sprint 3  
-*Effort:* 2XL, 3L, 3M = 53h  
+# Sprint 4 - Transaction Processing Engine
+**Goal:** Build multi-currency transaction processing with external gateway integration
 
-## Sprint 5: Performance Optimization & System Integration
-**Goal:** Optimize performance, integrate components, and ensure system reliability
+**Dependencies:** Sprint 1, Sprint 3
 
-- [ ] **T-42** Implement caching layer for frequently generated content | L | NFR-02
-- [ ] **T-43** Optimize database queries and add necessary indexes | M | NFR-02
-- [ ] **T-44** Implement horizontal scaling for AI model workers | L | NFR-02
-- [ ] **T-45** Add comprehensive logging and monitoring integration | L | NFR-02
-- [ ] **T-46** Conduct load testing and performance benchmarking | XL | NFR-02
-- [ ] **T-47** Implement automated recovery mechanisms for transient failures | L | NFR-02
-- [ ] **T-48** Finalize system metrics collection and reporting | M | FR-10
-- [ ] **T-49** Perform end-to-end integration testing of all services | XL | FR-01, FR-02, FR-03, FR-04
-- [ ] **T-50** Update documentation and prepare deployment artifacts | M | All FRs
+- [ ] **T-24** Design transactions and payments tables in database | **Effort:** M | **FR:** FR-03
+- [ ] **T-25** Implement currency conversion system with daily rate updates | **Effort:** L | **FR:** FR-03
+- [ ] **T-26** Build core transaction processing engine | **Effort:** L | **FR:** FR-03
+- [ ] **T-27** Integrate with first set of payment gateways (USD, EUR, GBP) | **Effort:** M | **FR:** FR-03
+- [ ] **T-28** Extend payment gateway integration to remaining currencies (JPY, BRL, INR, MXN, NGN, KES, ARS) | **Effort:** L | **FR:** FR-03
+- [ ] **T-29** Implement transaction record storage with USD equivalent tracking | **Effort:** M | **FR:** FR-03
 
-*Dependencies:* Sprint 4  
-*Effort:* 2XL, 4L, 3M = 56h  
+---
 
-## Total Effort Estimate Table
+# Sprint 5 - Real-Time Dashboard Development
+**Goal:** Deliver operational dashboard for business owners with real-time metrics
+
+**Dependencies:** Sprint 2, Sprint 4
+
+- [ ] **T-30** Design dashboard UI layout with key metrics visualization | **Effort:** M | **FR:** FR-04
+- [ ] **T-31** Implement WebSocket server for real-time data streaming | **Effort:** M | **FR:** FR-04
+- [ ] **T-32** Build revenue calculation engine with real-time updates | **Effort:** L | **FR:** FR-04
+- [ ] **T-33** Connect dashboard to transaction database with optimized queries | **Effort:** M | **FR:** FR-04
+- [ ] **T-34** Implement failed transaction tracking and display | **Effort:** M | **FR:** FR-04
+- [ ] **T-35** Optimize dashboard data refresh to meet 30-second requirement | **Effort:** S | **FR:** FR-04
+
+---
+
+# Sprint 6 - Fraud Prevention Integration
+**Goal:** Implement comprehensive fraud detection preventing suspicious transactions
+
+**Dependencies:** Sprint 4
+
+- [ ] **T-36** Integrate third-party fraud detection service API | **Effort:** M | **FR:** FR-07
+- [ ] **T-37** Implement transaction risk scoring system | **Effort:** M | **FR:** FR-07
+- [ ] **T-38** Configure automatic blocking of high-risk transactions | **Effort:** M | **FR:** FR-07
+- [ ] **T-39** Add fraud detection logging and reporting capabilities | **Effort:** S | **FR:** FR-07
+- [ ] **T-40** Validate fraud detection accuracy meets 95%+ blocking threshold | **Effort:** M | **FR:** FR-07
+- [ ] **T-41** Fine-tune fraud detection parameters to keep false positives under 1% | **Effort:** M | **FR:** FR-07
+
+---
+
+# Sprint 7 - SDK Development & Documentation
+**Goal:** Provide complete developer SDKs in six programming languages
+
+**Dependencies:** Sprint 1
+
+- [ ] **T-42** Design unified SDK interface specification for all languages | **Effort:** M | **FR:** FR-08
+- [ ] **T-43** Implement JavaScript SDK with npm packaging | **Effort:** M | **FR:** FR-08
+- [ ] **T-44** Implement Python SDK with pip packaging | **Effort:** M | **FR:** FR-08
+- [ ] **T-45** Implement Java SDK with Maven packaging | **Effort:** M | **FR:** FR-08
+- [ ] **T-46** Implement PHP SDK with Composer packaging | **Effort:** M | **FR:** FR-08
+- [ ] **T-47** Implement Ruby SDK with gem packaging | **Effort:** M | **FR:** FR-08
+- [ ] **T-48** Implement Go SDK with module packaging | **Effort:** M | **FR:** FR-08
+- [ ] **T-49** Create comprehensive SDK documentation with code examples | **Effort:** L | **FR:** FR-08
+- [ ] **T-50** Test all SDKs against live platform endpoints | **Effort:** L | **FR:** FR-08
+
+---
+
+# Sprint 8 - Webhook & Payout Automation System
+**Goal:** Implement automated event notifications and payout scheduling system
+
+**Dependencies:** Sprint 1, Sprint 4
+
+- [ ] **T-51** Design webhooks table for tracking delivery attempts | **Effort:** S | **FR:** FR-09
+- [ ] **T-52** Implement webhook delivery mechanism with exponential backoff | **Effort:** M | **FR:** FR-09
+- [ ] **T-53** Add webhook retry logic up to 5 times over 72 hours | **Effort:** M | **FR:** FR-09
+- [ ] **T-54** Implement payout schedules table and configuration API | **Effort:** M | **FR:** FR-06
+- [ ] **T-55** Build automated payout execution engine with scheduler | **Effort:** L | **FR:** FR-06
+- [ ] **T-56** Implement payout notification system via email | **Effort:** M | **FR:** FR-06
+- [ ] **T-57** Create payout reporting and audit trail capabilities | **Effort:** M | **FR:** FR-06
+
+---
+
+# Sprint 9 - Customer Subscription Lifecycle Features
+**Goal:** Enable full subscription management including upgrades, downgrades and cancellations
+
+**Dependencies:** Sprint 2, Sprint 4
+
+- [ ] **T-58** Design subscriptions table and relationship with customers/plans | **Effort:** M | **FR:** FR-10
+- [ ] **T-59** Implement subscription assignment to customers | **Effort:** M | **FR:** FR-10
+- [ ] **T-60** Build subscription status tracking system (active, canceled, paused) | **Effort:** M | **FR:** FR-10
+- [ ] **T-61** Implement subscription upgrade/downgrade functionality with billing adjustments | **Effort:** L | **FR:** FR-10
+- [ ] **T-62** Add subscription cancellation capability with proper proration calculations | **Effort:** M | **FR:** FR-10
+- [ ] **T-63** Create API for listing customer subscriptions with full history | **Effort:** M | **FR:** FR-10
+- [ ] **T-64** Optimize subscription retrieval performance for large customer bases | **Effort:** M | **FR:** FR-10
+
+---
+
+# Sprint 10 - System Hardening & Testing
+**Goal:** Complete final validation, performance optimization, and security hardening
+
+**Dependencies:** All previous sprints
+
+- [ ] **T-65** Conduct full system integration testing across all modules | **Effort:** L | **FR:** All
+- [ ] **T-66** Perform security audit and penetration testing | **Effort:** L | **FR:** All
+- [ ] **T-67** Optimize database queries and implement connection pooling | **Effort:** M | **FR:** NFR-01
+- [ ] **T-68** Implement caching strategy for improved API response times | **Effort:** M | **FR:** NFR-01
+- [ ] **T-69** Load test system to validate 99.9% uptime and sub-200ms response times | **Effort:** L | **FR:** NFR-01
+- [ ] **T-70** Finalize API documentation with working examples in all SDK languages | **Effort:** M | **FR:** All
+
+## Total Estimate Table
 
 | Sprint | Hours |
 |--------|-------|
-| Sprint 0 | 14h |
-| Sprint 1 | 22h |
-| Sprint 2 | 30h |
-| Sprint 3 | 55h |
-| Sprint 4 | 53h |
-| Sprint 5 | 56h |
-| **Total** | **230h** |
+| Sprint 0 | 20 |
+| Sprint 1 | 24 |
+| Sprint 2 | 22 |
+| Sprint 3 | 22 |
+| Sprint 4 | 30 |
+| Sprint 5 | 26 |
+| Sprint 6 | 24 |
+| Sprint 7 | 36 |
+| Sprint 8 | 30 |
+| Sprint 9 | 32 |
+| Sprint 10 | 34 |
+| **Total** | **280 hours** |
 
-## Calendar Time Estimates
-
-- **Solo Developer (40h/wk):** 6 weeks
-- **Two-Developer Team (80h/wk):** 3 weeks
+**Calendar Estimate:**
+- Solo Developer (40h/wk): 7 weeks
+- Two-Developer Team (80h/wk): 3.5 weeks
